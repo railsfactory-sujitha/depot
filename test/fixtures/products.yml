@@ -13,7 +13,7 @@ two:
   price: 9.99
 
 ruby:
-  title: Programming ruby
+  title: Programming ruby 1.9
   description: This is the description given for the ruby program
   image_url: images.jpeg
   price: 65.05
