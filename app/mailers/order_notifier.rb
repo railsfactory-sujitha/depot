@@ -8,7 +8,7 @@ class OrderNotifier < ActionMailer::Base
   #
   def received(order)
     @order = order
-    
+    attachments['image.jpeg'] = File.read('/home/manjusagar/project/depot/public/image.jpeg')
     mail to: order.email, subject: 'Pragmatic Store Order Confirmation'
   end
 

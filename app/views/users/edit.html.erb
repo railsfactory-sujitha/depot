@@ -1,6 +1,28 @@
 <h1>Editing user</h1>
-
-<%= render 'form' %>
-
+<div class="depot_form">
+<%= form_for(@user) do |f| %>
+<fieldset>
+   <legend>Enter User Details</legend>
+  <div class="field">
+    <%= f.label :name, 'Name:' %><br>
+    <%= f.text_field :name, size: 40 %>
+  </div>
+  <div class="field">
+    <%= f.label :current_password, 'Current:' %><br>
+    <%= f.password_field :current_password, size: 40 %>
+  </div>
+  <div class="field">
+    <%= f.label :change_password, 'Password:' %><br>
+    <%= f.password_field :change_password, size: 40 %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation, 'Confirm:' %><br>
+    <%= f.password_field :password_confirmation, size: 40 %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+</fieldset>
+<% end %>
 <%= link_to 'Show', @user %> |
 <%= link_to 'Back', users_path %>
