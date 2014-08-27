@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'abouts/index'
+
  get 'admin' => 'admin#index'
  controller :sessions do
 	get 'login' => :new
@@ -19,6 +21,7 @@ Rails.application.routes.draw do
   resources :line_items
   resources :carts
    root 'store#index', as: 'store', via: :all
+   #root 'about#index', as: 'about', via: :all
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
