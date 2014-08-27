@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'questions/index'
+
   get 'abouts/index'
 
  get 'admin' => 'admin#index'
