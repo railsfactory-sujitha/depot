@@ -15,6 +15,7 @@ ruby_book = products(:ruby)
 
 get "/"
 assert_response :success
+#format.haml { render "index" }
 assert_template "index"
 
 
