@@ -1,0 +1,8 @@
+<div class="depot_form">
+<fieldset>
+<legend><h4><%= t('.legend') %></h4></legend>
+<%= render 'form' %>
+</fieldset>
+
+
+</div>

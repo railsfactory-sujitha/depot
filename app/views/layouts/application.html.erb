@@ -1,50 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Pragprog Books Online Store</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+<title>Pragmatic BookShelf</title>
+<%= stylesheet_link_tag "application", media: "all","data-turbolinks-track" => true %>
+<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+<%= csrf_meta_tags %>
 </head>
 <body class="<%= controller.controller_name %>">
-  <div id="banner">
-    <%= form_tag store_path, class: 'locale' do %>
-      <%= select_tag 'set_locale', options_for_select(LANGUAGES, I18n.locale.to_s), onchange: 'this.form.submit()' %>
-      <%= submit_tag 'submit' %>
-      <%= javascript_tag "$('.locale input').hide()" %>    
-    <% end %>      
 
-     <%= image_tag("logo1.jpeg") %>
-     <%= @page_title || t('.title') %>
-  </div>
-  <div id="columns">
-     <div id="side">
-        <div id="cart">
-        <% if @cart %>
-	<%= hidden_div_if(@cart.line_items.empty?, id: 'cart') do %>
-          <%= render @cart %>
-        <% end %>
-        <% end %>
-         </div>
-         <ul>
-           <li><a href="/"><%= t('.home') %></a></li>
-           <li><a href="http://localhost:3000/questions/index"><%= t('.questions') %></a></li>
-           <li><a href="https://news.google.co.in"><%= t('.news') %></a></li>
-           <li><a href="http://localhost:3000/abouts/index"><%= t('.contact') %></a></li>
-	  </ul>
-	  <% if session[:user_id] %>
-	<ul>
-		<li><%= link_to 'Orders', orders_path%></li>
-		<li><%= link_to 'Products', products_path %></li>
-		<li><%= link_to 'Users', users_path %></li>
-	</ul>
-	<%= button_to 'Logout', logout_path, method: :delete %>
-	<% end %>
+<div id="banner">
+<%= image_tag("logo1.jpeg") %>
+<%= @page_title || t('.title') %>
+<%= form_tag store_path, class: 'locale' do %>
+<%= select_tag 'set_locale', options_for_select(LANGUAGES, I18n.locale.to_s), onchange: 'this.form.submit()' %>
+<%= submit_tag 'submit' %>
+<%= javascript_tag "$('.locale input').hide()" %>
+<% end %>
+</div>
+<% if user_signed_in? %>
+  
+   You are currently signed in as <%= current_user.email %>
+ 
+ 
+   <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+<% else %>
+ 
+   <%= link_to "Sign up!", new_user_registration_path %> or <%= link_to "Sign in", new_user_session_path %>
+  
+<% end %>
+<div id="columns">
 
-     </div>
-     <div id="main">
-             <%= yield %>
-     </div>
-   </div>
+<div id="side">
+
+<ul>
+<li><a href="http://localhost:3000/en"><%= t('.home') %></a></li>
+
+<% if user_signed_in? %>
+<li><%= link_to "Your Profile", edit_user_registration_path %></li>
+<li><%= link_to "User's History", '/history' %></li>
+<% end %>
+
+
+
+</ul>
+<% if session[:user_id] %>
+<ul>
+<li><%= link_to t('.orders'), orders_path%></li>
+<li><%= link_to t('.products'), products_path %></li>
+<li><%= link_to t('.users'), users_path%></li>
+</ul>
+<%= button_to 'Logout', logout_path, method: :delete %>
+<% end %>
+<% if @cart %>
+<%= hidden_div_if(@cart.line_items.empty?, id: 'cart') do %>
+<%= render @cart %>
+<% end %>
+<% end %>
+
+</div>
+
+
+<div id="main">
+<%= yield %>
+</div>
+</div>
 </body>
 </html>
+

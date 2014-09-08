@@ -1,0 +1,24 @@
+
+<h3> History of <%= current_user.name %> </h3>
+
+
+<% @history.each do |orders| %>
+<table border="2">
+<tr>
+	<th> Product name </th>
+	<th> price </th>
+	<th> Quantity </th>
+	<th> Created at </th>
+</tr>
+<tr>
+        <td><%= orders.product.title %></td>
+        <td><%= orders.product.price %></td>
+        <td><%= orders.quantity %></td>
+	<td><%= orders.created_at %></td>
+</tr>
+</table>        
+
+<% end %>
+
+
+
